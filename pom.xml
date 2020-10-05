@@ -28,28 +28,35 @@
   </parent>
   <groupId>com.hortonworks</groupId>
   <artifactId>shc</artifactId>
-  <version>1.1.2-2.3-s_2.11-SNAPSHOT</version>
+  <version>1.1.2-3.0-s_2.12</version>
   <packaging>pom</packaging>
-  <name>HBase Spark Connector Project Parent POM</name>
-  <url>https://github.com/hortonworks-spark/shc</url>
 
   <distributionManagement>
     <repository>
-      <id>${repoid}</id>
-      <name>${reponame}</name>
-      <url>${repourl}</url>
-    </repository>         
+      <uniqueVersion>false</uniqueVersion>
+      <id>maven-releases</id>
+      <name>Corporate Repository</name>
+      <url>http://dl-nexus.lendingtree.com:8081/repository/maven-releases/</url>
+      <layout>default</layout>
+    </repository>
+    <snapshotRepository>
+      <uniqueVersion>true</uniqueVersion>
+      <id>maven-snapshot</id>
+      <name>UAT Snapshots</name>
+      <url>http://dl-nexus.lendingtree.com:8081/repository/maven-snapshot/</url>
+      <layout>default</layout>
+    </snapshotRepository>
   </distributionManagement>   
 
   <properties>
-    <spark.version>2.3.0</spark.version>
+    <spark.version>3.0.0</spark.version>
     <hbase.version>1.1.2</hbase.version>
     <phoenix.version>4.9.0-HBase-1.1</phoenix.version>
     <test_classpath_file>${project.build.directory}/spark-test-classpath.txt</test_classpath_file>
     <java.version>1.7</java.version>
-    <scala.version>2.11.8</scala.version>
+    <scala.version>2.12.12</scala.version>
     <scala.macros.version>2.1.0</scala.macros.version>
-    <scala.binary.version>2.11</scala.binary.version>
+    <scala.binary.version>2.12</scala.binary.version>
     <avro.version>1.7.6</avro.version>
     <codahale.metrics.version>3.0.0</codahale.metrics.version>
     <codehaus.jackson.version>1.8.8</codehaus.jackson.version>
@@ -89,14 +96,6 @@
       </snapshots>
     </repository>
   </repositories>
-
-  <dependencies>
-    <dependency>
-      <groupId>org.scala-lang</groupId>
-      <artifactId>scala-library</artifactId>
-      <version>${scala.version}</version>
-    </dependency>
-  </dependencies>
 
   <build>
     <outputDirectory>target/scala-${scala.binary.version}/classes</outputDirectory>
@@ -183,14 +182,14 @@
 
   <profiles>
     <profile>
-      <id>scala-2.11</id>
+      <id>scala-2.12</id>
       <activation>
         <property><name>!scala-2.10</name></property>
       </activation>
       <properties>
-        <scala.version>2.11.8</scala.version>
+        <scala.version>2.12.12</scala.version>
         <scala.macros.version>2.1.0</scala.macros.version>
-        <scala.binary.version>2.11</scala.binary.version>
+        <scala.binary.version>2.12</scala.binary.version>
       </properties>
     </profile>
     <profile>
