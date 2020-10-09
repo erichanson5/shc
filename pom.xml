@@ -55,7 +55,7 @@
     <test_classpath_file>${project.build.directory}/spark-test-classpath.txt</test_classpath_file>
     <java.version>1.8</java.version>
     <scala.version>2.12.12</scala.version>
-    <scala.macros.version>2.1.0</scala.macros.version>
+    <scala.macros.version>2.1.1</scala.macros.version>
     <scala.binary.version>2.12</scala.binary.version>
     <avro.version>1.7.6</avro.version>
     <codahale.metrics.version>3.0.0</codahale.metrics.version>
@@ -188,7 +188,7 @@
       </activation>
       <properties>
         <scala.version>2.12.12</scala.version>
-        <scala.macros.version>2.1.0</scala.macros.version>
+        <scala.macros.version>2.1.1</scala.macros.version>
         <scala.binary.version>2.12</scala.binary.version>
       </properties>
     </profile>
