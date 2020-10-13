@@ -24,10 +24,8 @@ import java.io._
 
 import scala.util.control.NonFatal
 import scala.xml.XML
-
 import org.json4s.DefaultFormats
 import org.json4s.jackson.JsonMethods._
-
 import org.apache.hadoop.conf.Configuration
 import org.apache.hadoop.hbase.client.Put
 import org.apache.hadoop.hbase.io.ImmutableBytesWritable
@@ -39,7 +37,7 @@ import org.apache.spark.rdd.RDD
 import org.apache.spark.sql.sources._
 import org.apache.spark.sql.types._
 import org.apache.spark.sql.{DataFrame, Row, SQLContext, SaveMode}
-import org.apache.spark.sql.execution.datasources.hbase.types.SHCDataTypeFactory
+import org.apache.spark.sql.execution.datasources.hbase.types.{SHCDataType, SHCDataTypeFactory}
 import org.apache.spark.util.Utils
 
 /**
@@ -81,6 +79,7 @@ case class HBaseRelation(
   val maxStamp = parameters.get(HBaseRelation.MAX_STAMP).map(_.toLong)
   val maxVersions = parameters.get(HBaseRelation.MAX_VERSIONS).map(_.toInt)
   val mergeToLatest = parameters.get(HBaseRelation.MERGE_TO_LATEST).map(_.toBoolean).getOrElse(true)
+  val restrictive = parameters.getOrElse(HBaseRelation.RESTRICTIVE, HBaseRelation.Restrictive.column)
 
   val catalog = HBaseTableCatalog(parameters)
 
@@ -323,6 +322,14 @@ class SerializableConfiguration(@transient var value: Configuration) extends Ser
 }
 
 object HBaseRelation {
+
+  object Restrictive {
+    val none = "NONE"
+    val family = "FAMILY"
+    val column = "COLUMN"
+  }
+
+  val RESTRICTIVE = "restrictive"
   val TIMESTAMP = "timestamp"
   val MIN_STAMP = "minStamp"
   val MAX_STAMP = "maxStamp"

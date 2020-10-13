@@ -26,7 +26,6 @@ import scala.annotation.tailrec
 
 import org.apache.hadoop.hbase.util.Bytes
 import org.apache.spark.sql.execution.datasources.hbase
-import org.apache.spark.unsafe.types.UTF8String
 import org.apache.spark.sql.execution.datasources.hbase.types.SHCDataTypeFactory
 
 case class Bound[T](point: T, inc: Boolean)(implicit ordering: Ordering[T]) {
@@ -415,10 +414,10 @@ object BoundRange extends Logging{
           Some(BoundRanges(Array(BoundRange(min, b)),Array(BoundRange(b, max)), b))
         }
 
-      case _: Array[Byte] | _: Byte | _: String | _: UTF8String =>
+      case _: Array[Byte] | _: Byte | _: String =>
         Some(BoundRanges(
           Array(BoundRange(Array.fill(b.length)(ByteMin), b)),
-          Array(BoundRange(b, Array.fill(b.length)(ByteMax))), b))
+          Array(BoundRange(b, Array.fill(b.length)(ByteMax.toByte))), b))
 
       case _ => None
     }
