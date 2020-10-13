@@ -28,28 +28,37 @@
   </parent>
   <groupId>com.hortonworks</groupId>
   <artifactId>shc</artifactId>
-  <version>1.1.3-2.4-s_2.11</version>
+  <version>1.1.2-2.4-s_2.12</version>
   <packaging>pom</packaging>
   <name>HBase Spark Connector Project Parent POM</name>
   <url>https://github.com/hortonworks-spark/shc</url>
 
   <distributionManagement>
     <repository>
-      <id>${repoid}</id>
-      <name>${reponame}</name>
-      <url>${repourl}</url>
-    </repository>         
+      <uniqueVersion>false</uniqueVersion>
+      <id>maven-releases</id>
+      <name>Corporate Repository</name>
+      <url>http://dl-nexus.lendingtree.com:8081/repository/maven-releases/</url>
+      <layout>default</layout>
+    </repository>
+    <snapshotRepository>
+      <uniqueVersion>true</uniqueVersion>
+      <id>maven-snapshot</id>
+      <name>UAT Snapshots</name>
+      <url>http://dl-nexus.lendingtree.com:8081/repository/maven-snapshot/</url>
+      <layout>default</layout>
+    </snapshotRepository>
   </distributionManagement>   
 
   <properties>
     <maven.version>3.5.4</maven.version>
-    <spark.version>2.4.0</spark.version>
-    <hbase.version>2.0.2</hbase.version>
-    <phoenix.version>5.0.0-HBase-2.0</phoenix.version>
+    <spark.version>2.4.4</spark.version>
+    <hbase.version>1.1.2</hbase.version>
+    <phoenix.version>4.9.0-HBase-1.1</phoenix.version>
     <test_classpath_file>${project.build.directory}/spark-test-classpath.txt</test_classpath_file>
     <java.version>1.8</java.version>
-    <scala.version>2.11.12</scala.version>
-    <scala.macros.version>2.1.0</scala.macros.version>
+    <scala.version>2.12.12</scala.version>
+    <scala.macros.version>2.1.1</scala.macros.version>
     <scala.binary.version>2.12</scala.binary.version>
     <avro.version>1.8.2</avro.version>
     <codahale.metrics.version>3.0.0</codahale.metrics.version>

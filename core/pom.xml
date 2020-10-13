@@ -104,11 +104,6 @@
       </exclusions>
     </dependency>
     <dependency>
-      <groupId>org.apache.hbase</groupId>
-      <artifactId>hbase-mapreduce</artifactId>
-      <version>${hbase.version}</version>
-    </dependency>
-    <dependency>
       <groupId>org.apache.phoenix</groupId>
       <artifactId>phoenix-core</artifactId>
       <version>${phoenix.version}</version>
@@ -128,7 +123,7 @@
     <dependency>
       <groupId>org.scalatest</groupId>
       <artifactId>scalatest_${scala.binary.version}</artifactId>
-      <version>2.2.1</version>
+      <version>3.0.3</version>
       <scope>test</scope>
     </dependency>
   </dependencies>
